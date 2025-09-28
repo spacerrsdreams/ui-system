@@ -25,10 +25,7 @@ import {
 } from "@/components/ai-elements/reasoning";
 import { Loader } from "@/components/ai-elements/loader";
 import { AiChatForm } from "@/components/ai-chat-drawer/ai-chat/ai-chat-form";
-import {
-  AiModels,
-  AiModelT,
-} from "@/components/ai-chat-drawer/ai-chat/constants";
+import { AiModels, AiModelT } from "@/constants/ai-models";
 
 export const AiChat = () => {
   const [input, setInput] = useState("");

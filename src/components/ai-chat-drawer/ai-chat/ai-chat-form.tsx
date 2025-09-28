@@ -1,8 +1,6 @@
 import {
   PromptInput,
-  PromptInputActionAddAttachments,
   PromptInputActionMenu,
-  PromptInputActionMenuContent,
   PromptInputActionMenuTrigger,
   PromptInputAttachment,
   PromptInputAttachments,
@@ -20,8 +18,16 @@ import {
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
 import { GlobeIcon } from "lucide-react";
-import { AiModels, AiModelT } from "./constants";
+import { AiModels, AiModelT } from "@/constants/ai-models";
 import { ChatStatus } from "ai";
+import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface AiChatFormProps {
   model: AiModelT["value"];
@@ -44,6 +50,8 @@ export const AiChatForm = ({
   setWebSearch,
   status,
 }: AiChatFormProps) => {
+  const SelectedModel = AiModels.find((AiModel) => AiModel.value === model)!;
+
   return (
     <PromptInput onSubmit={onSubmit} className="mt-4" globalDrop multiple>
       <PromptInputBody>
@@ -55,36 +63,42 @@ export const AiChatForm = ({
           value={input}
         />
       </PromptInputBody>
+
       <PromptInputToolbar>
-        <PromptInputTools>
+        <PromptInputTools className="gap-0.5 py-0">
           <PromptInputActionMenu>
-            <PromptInputActionMenuTrigger />
-            <PromptInputActionMenuContent>
-              <PromptInputActionAddAttachments />
-            </PromptInputActionMenuContent>
+            <PromptInputActionMenuTrigger
+              variant="ghost"
+              className="!rounded-full !p-2 size-7"
+              size="icon"
+            />
           </PromptInputActionMenu>
+
+          <Select onValueChange={(value: AiModelT["value"]) => setModel(value)}>
+            <SelectTrigger
+              showChevron={false}
+              className="group transition-all duration-200 border-none hover:bg-muted-foreground/40 hover:text-foreground rounded-full !size-7 p-2 items-center justify-center flex"
+            >
+              <SelectedModel.icon className="size-4 group-hover:text-foreground" />
+            </SelectTrigger>
+            <SelectContent>
+              {AiModels.map((AiModel) => (
+                <SelectItem key={AiModel.value} value={AiModel.value}>
+                  {<AiModel.icon className="size-4 text-foreground" />}
+                  <span className="text-xs">{AiModel.name}</span>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <PromptInputButton
             variant="ghost"
+            className={cn("!rounded-full", webSearch && " text-foreground")}
+            size="icon"
             onClick={() => setWebSearch(!webSearch)}
           >
             <GlobeIcon size={16} />
-            <span>Search</span>
+            <span className="text-xs">Web Search</span>
           </PromptInputButton>
-          <PromptInputModelSelect
-            value={model}
-            onValueChange={(value: AiModelT["value"]) => setModel(value)}
-          >
-            <PromptInputModelSelectTrigger>
-              <PromptInputModelSelectValue />
-            </PromptInputModelSelectTrigger>
-            <PromptInputModelSelectContent>
-              {AiModels.map((m) => (
-                <PromptInputModelSelectItem key={m.value} value={m.value}>
-                  {m.name}
-                </PromptInputModelSelectItem>
-              ))}
-            </PromptInputModelSelectContent>
-          </PromptInputModelSelect>
         </PromptInputTools>
         <PromptInputSubmit disabled={!input && !status} status={status} />
       </PromptInputToolbar>
