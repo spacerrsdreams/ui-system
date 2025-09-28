@@ -14,18 +14,24 @@ export const MenuTrigger = ({
   isOpen,
 }: MenuTriggerProps) => {
   return (
-    <div className="fixed top-2.5 left-2.5 group">
+    <div className="fixed top-2.5 left-2.5 group" onMouseEnter={toggleMenu}>
       <Button
         onClick={toggleMenu}
         data-burger-menu
-        className={cn("z-50  p-3", className)}
+        className={cn("z-[99999]  p-3", className)}
         variant="ghost"
         size="icon"
         aria-label="Toggle navigation menu"
       >
-        <Menu className="size-5.5 block group-hover:hidden" strokeWidth={1.5} />
+        <Menu
+          className={cn(
+            "size-5.5 block group-hover:hidden",
+            isOpen && "hidden"
+          )}
+          strokeWidth={1.5}
+        />
         <ChevronsRight
-          className="size-5.5 hidden group-hover:block"
+          className={cn("size-5.5 hidden group-hover:block", isOpen && "block")}
           strokeWidth={1.5}
         />
       </Button>

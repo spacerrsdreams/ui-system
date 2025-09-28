@@ -18,8 +18,7 @@ const menuItems = [
 
 export function BurgerMenu() {
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const menuRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -45,21 +44,34 @@ export function BurgerMenu() {
     }
   }, [isOpen]);
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <MenuTrigger toggleMenu={toggleMenu} isOpen={isOpen} />
 
       <div
+        onMouseEnter={() => setIsOpen(true)}
+        className={cn(
+          "fixed top-10 left-0 w-8 opacity-0",
+          !isOpen && `h-[200px]`
+        )}
+      />
+
+      <div
+        onMouseLeave={() => setIsOpen(false)}
         data-burger-menu
         className={cn(
-          "fixed top-14 left-0 w-60 rounded-tr-md shadow-sm rounded-br-md  bg-sidebar border-t border-r border-b ",
-          "transform transition-all duration-300 ease-in-out",
+          "fixed top-18  left-0 w-60 h-full ",
+          "transform transition-all duration-200 ease-in-out",
           isOpen
             ? "translate-x-0 opacity-100"
             : "-translate-x-full opacity-0 pointer-events-none"
         )}
       >
-        <nav className="py-2 px-2">
+        <nav className="py-2 px-2 rounded-tr-md shadow-sm rounded-br-md  bg-sidebar border-t border-r border-b">
           <ul className="space-y-0.5">
             {menuItems.map((item) => {
               return (
