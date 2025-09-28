@@ -91,7 +91,7 @@ export function PromptInputAttachment({
       {data.mediaType?.startsWith("image/") && data.url ? (
         <img
           alt={data.filename || "attachment"}
-          className="size-full rounded-md object-cover"
+          className="size-9 rounded-md object-cover"
           height={56}
           src={data.url}
           width={56}
@@ -637,8 +637,6 @@ export const PromptInputSubmit = ({
     Icon = <XIcon className="size-4" />;
   }
 
-  console.log(props.disabled);
-
   return (
     <Button
       size={size}
@@ -646,7 +644,7 @@ export const PromptInputSubmit = ({
       variant={variant}
       {...props}
       className={cn(
-        "gap-1.5 rounded-lg ",
+        "gap-1.5 rounded-full ",
         props.disabled && "bg-muted-foreground/40",
         className
       )}
