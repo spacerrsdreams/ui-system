@@ -15,10 +15,6 @@ const finalColors: {
     value: "oklch(0.2134 0 0)",
   },
   {
-    label: "secondary",
-    value: "oklch(0.2435 0 0)",
-  },
-  {
     label: "foreground",
     value: "oklch(0.985 0 0)",
   },
