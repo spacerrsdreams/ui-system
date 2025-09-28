@@ -7,7 +7,7 @@ import { AiChatForm } from "@/components/ai-chat-drawer/ai-chat/ai-chat-form";
 import { AiModels, AiModelT } from "@/constants/ai-models";
 import { Conversation } from "@/components/ai-chat-drawer/ai-chat/conversation";
 
-export const AiChat = () => {
+export const AiChat = ({ open }: { open: boolean }) => {
   const [input, setInput] = useState("");
   const [webSearch, setWebSearch] = useState(false);
   const [model, setModel] = useState<AiModelT["value"]>(AiModels[0].value);
@@ -55,6 +55,7 @@ export const AiChat = () => {
           setWebSearch={setWebSearch}
           onSubmit={handleSubmit}
           status={status}
+          open={open}
         />
       </div>
     </div>

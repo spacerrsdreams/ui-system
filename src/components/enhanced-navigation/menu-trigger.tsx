@@ -6,17 +6,19 @@ interface MenuTriggerProps {
   toggleMenu: () => void;
   className?: string;
   isOpen: boolean;
+  onClick: () => void;
 }
 
 export const MenuTrigger = ({
   toggleMenu,
   className,
   isOpen,
+  onClick,
 }: MenuTriggerProps) => {
   return (
-    <div className="fixed top-2.5 left-2.5 group" onMouseEnter={toggleMenu}>
+    <div className="fixed top-1.5 left-2.5 group" onMouseEnter={toggleMenu}>
       <Button
-        onClick={toggleMenu}
+        onClick={onClick}
         data-burger-menu
         className={cn("z-[99999]  p-3", className)}
         variant="ghost"

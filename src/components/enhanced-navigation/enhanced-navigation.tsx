@@ -18,7 +18,7 @@ const menuItems = [
 
 export function BurgerMenu() {
   const [isOpen, setIsOpen] = React.useState(false);
-  const menuRef = React.useRef<HTMLDivElement>(null);
+  const [prefersSidebar, setPrefersSidebar] = React.useState(false);
 
   React.useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -48,9 +48,15 @@ export function BurgerMenu() {
     setIsOpen(!isOpen);
   };
 
+  const onMenuTriggerClick = () => setPrefersSidebar(true);
+
   return (
     <>
-      <MenuTrigger toggleMenu={toggleMenu} isOpen={isOpen} />
+      <MenuTrigger
+        toggleMenu={toggleMenu}
+        isOpen={isOpen}
+        onClick={onMenuTriggerClick}
+      />
 
       <div
         onMouseEnter={() => setIsOpen(true)}

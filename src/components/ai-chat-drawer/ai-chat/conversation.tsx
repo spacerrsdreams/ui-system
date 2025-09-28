@@ -27,8 +27,6 @@ export const Conversation = ({
 }: ConversationProps) => {
   const isStreaming = status === "streaming" || status === "submitted";
 
-  console.log(messages);
-
   return (
     <ConversationElement className={cn("h-full", className)}>
       <ConversationContent>

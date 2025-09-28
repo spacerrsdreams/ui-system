@@ -90,7 +90,7 @@ export function AiChatDrawer() {
           </div>
 
           <div className="flex-1 p-4 pt-4 overflow-hidden">
-            <AiChat />
+            <AiChat open={isOpen} />
           </div>
         </div>
       </div>

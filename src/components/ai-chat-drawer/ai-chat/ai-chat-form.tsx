@@ -22,6 +22,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
+import { useEffect, useRef } from "react";
 
 interface AiChatFormProps {
   model: AiModelT["value"];
@@ -32,6 +33,7 @@ interface AiChatFormProps {
   setWebSearch: (webSearch: boolean) => void;
   onSubmit: (message: PromptInputMessage) => void;
   status: ChatStatus | undefined;
+  open: boolean;
 }
 
 export const AiChatForm = ({
@@ -43,8 +45,16 @@ export const AiChatForm = ({
   webSearch,
   setWebSearch,
   status,
+  open,
 }: AiChatFormProps) => {
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const SelectedModel = AiModels.find((AiModel) => AiModel.value === model)!;
+
+  useEffect(() => {
+    if (inputRef.current && open) {
+      inputRef.current.focus();
+    }
+  }, [open]);
 
   return (
     <PromptInput onSubmit={onSubmit} className="mt-2" globalDrop multiple>
@@ -53,6 +63,7 @@ export const AiChatForm = ({
           {(attachment) => <PromptInputAttachment data={attachment} />}
         </PromptInputAttachments>
         <PromptInputTextarea
+          ref={inputRef}
           onChange={(e) => setInput(e.target.value)}
           value={input}
         />
