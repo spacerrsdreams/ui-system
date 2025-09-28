@@ -1,7 +1,7 @@
 import {
   PromptInput,
-  PromptInputActionMenu,
-  PromptInputActionMenuTrigger,
+  // PromptInputActionMenu,
+  // PromptInputActionMenuTrigger,
   PromptInputAttachment,
   PromptInputAttachments,
   PromptInputBody,
@@ -47,7 +47,7 @@ export const AiChatForm = ({
   const SelectedModel = AiModels.find((AiModel) => AiModel.value === model)!;
 
   return (
-    <PromptInput onSubmit={onSubmit} className="mt-4" globalDrop multiple>
+    <PromptInput onSubmit={onSubmit} className="mt-2" globalDrop multiple>
       <PromptInputBody>
         <PromptInputAttachments>
           {(attachment) => <PromptInputAttachment data={attachment} />}
@@ -60,13 +60,13 @@ export const AiChatForm = ({
 
       <PromptInputToolbar>
         <PromptInputTools className="gap-0.5 py-0">
-          <PromptInputActionMenu>
+          {/* <PromptInputActionMenu>
             <PromptInputActionMenuTrigger
               variant="ghost"
               className="!rounded-full !p-2 size-7"
               size="icon"
             />
-          </PromptInputActionMenu>
+          </PromptInputActionMenu> */}
 
           <Select onValueChange={(value: AiModelT["value"]) => setModel(value)}>
             <SelectTrigger

@@ -13,7 +13,7 @@ export const AiChat = () => {
   const [model, setModel] = useState<AiModelT["value"]>(AiModels[0].value);
   const { messages, sendMessage, status, regenerate } = useChat();
 
-  const handleSubmit = (message: PromptInputMessage) => {
+  const handleSubmit = async (message: PromptInputMessage) => {
     const hasText = Boolean(message.text);
     const hasAttachments = Boolean(message.files?.length);
 
@@ -24,7 +24,7 @@ export const AiChat = () => {
     sendMessage(
       {
         text: message.text || "Sent with attachments",
-        files: message.files,
+        // files: processedFiles,
       },
       {
         body: {
@@ -38,24 +38,25 @@ export const AiChat = () => {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex flex-1 flex-col">
-        <Conversation
-          messages={messages}
+    <div className="flex flex-col h-full min-h-0">
+      <Conversation
+        className="flex-1 min-h-0"
+        messages={messages}
+        status={status}
+        regenerate={regenerate}
+      />
+      <div className="flex-shrink-0 mt-2">
+        <AiChatForm
+          model={model}
+          setModel={setModel}
+          input={input}
+          setInput={setInput}
+          webSearch={webSearch}
+          setWebSearch={setWebSearch}
+          onSubmit={handleSubmit}
           status={status}
-          regenerate={regenerate}
         />
       </div>
-      <AiChatForm
-        model={model}
-        setModel={setModel}
-        input={input}
-        setInput={setInput}
-        webSearch={webSearch}
-        setWebSearch={setWebSearch}
-        onSubmit={handleSubmit}
-        status={status}
-      />
     </div>
   );
 };
