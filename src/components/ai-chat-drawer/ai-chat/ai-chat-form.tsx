@@ -100,7 +100,10 @@ export const AiChatForm = ({
             <span className="text-xs">Web Search</span>
           </PromptInputButton>
         </PromptInputTools>
-        <PromptInputSubmit disabled={!input && !status} status={status} />
+        <PromptInputSubmit
+          disabled={!input || status !== "ready"}
+          status={status}
+        />
       </PromptInputToolbar>
     </PromptInput>
   );

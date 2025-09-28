@@ -15,9 +15,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+import { cn, subString } from "@/lib/utils";
 import type { ChatStatus, FileUIPart } from "ai";
 import {
+  ArrowUp,
   Loader2Icon,
   PaperclipIcon,
   SendIcon,
@@ -83,7 +84,7 @@ export function PromptInputAttachment({
 
   return (
     <div
-      className={cn("group relative h-14 w-14 rounded-md border", className)}
+      className={cn("group relative rounded-md border", className)}
       key={data.id}
       {...props}
     >
@@ -96,8 +97,11 @@ export function PromptInputAttachment({
           width={56}
         />
       ) : (
-        <div className="flex size-full items-center justify-center text-muted-foreground">
+        <div className="flex flex-row items-center gap-2 p-2">
           <PaperclipIcon className="size-4" />
+          <span className="text-xs text-muted-foreground">
+            {subString(data.filename || "", 18)}
+          </span>
         </div>
       )}
       <Button
@@ -623,7 +627,7 @@ export const PromptInputSubmit = ({
   children,
   ...props
 }: PromptInputSubmitProps) => {
-  let Icon = <SendIcon className="size-4" />;
+  let Icon = <ArrowUp className="size-4 text-foreground" />;
 
   if (status === "submitted") {
     Icon = <Loader2Icon className="size-4 animate-spin" />;
@@ -633,13 +637,19 @@ export const PromptInputSubmit = ({
     Icon = <XIcon className="size-4" />;
   }
 
+  console.log(props.disabled);
+
   return (
     <Button
-      className={cn("gap-1.5 rounded-lg", className)}
       size={size}
       type="submit"
       variant={variant}
       {...props}
+      className={cn(
+        "gap-1.5 rounded-lg ",
+        props.disabled && "bg-muted-foreground/40",
+        className
+      )}
     >
       {children ?? Icon}
     </Button>
