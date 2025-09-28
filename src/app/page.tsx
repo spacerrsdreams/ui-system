@@ -34,7 +34,7 @@ const finalColors: {
 
 export default function Home() {
   return (
-    <div className="flex flex-1 items-center justify-center">
+    <div className="flex flex-1 items-center justify-center w-full h-full transition-all duration-300 ease-in-out">
       <div className="grid grid-cols-2 gap-10">
         <div className="flex flex-col gap-2">
           {finalColors.map((color) => (

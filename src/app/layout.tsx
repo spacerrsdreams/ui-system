@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "@/app/globals.css";
+import { AiChatDrawer } from "@/components/ai-chat-drawer/ai-chat-drawer";
 
 export default function RootLayout({
   children,
@@ -9,17 +10,18 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning className="h-full">
         <head />
-        <body>
+        <body className="h-full">
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
-            <main className="flex h-[100vh] flex-1 flex-col subpixel-antialiased">
+            <main className="flex h-full flex-row subpixel-antialiased transition-all duration-300 ease-in-out">
               {children}
+              <AiChatDrawer />
             </main>
           </ThemeProvider>
         </body>
