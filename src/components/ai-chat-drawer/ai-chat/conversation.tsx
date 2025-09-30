@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { MessageSources } from "@/components/ai-chat-drawer/ai-chat/message-sources";
 import { MessageReasoning } from "@/components/ai-chat-drawer/ai-chat/message-reasoning";
 import { TextMessage } from "./text-message";
+import { ConversationPlaceholder } from "@/components/ai-chat-drawer/ai-chat/conversation-placeholder";
 
 interface ConversationProps {
   messages: UIMessage[];
@@ -29,7 +30,14 @@ export const Conversation = ({
 
   return (
     <ConversationElement className={cn("h-full", className)}>
-      <ConversationContent>
+      <ConversationContent
+        className={cn(
+          "h-auto",
+          messages && messages.length === 0 && "h-[93%] px-2"
+        )}
+      >
+        {messages && messages.length === 0 && <ConversationPlaceholder />}
+
         {messages.map((message, messageIndex) => (
           <div key={message.id}>
             {message.role === "assistant" && (

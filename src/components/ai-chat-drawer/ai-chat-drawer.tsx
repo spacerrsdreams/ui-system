@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsRight } from "lucide-react";
+import { ChevronsRight, SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -73,23 +73,44 @@ export function AiChatDrawer() {
           // Mobile: fixed positioning
           "fixed top-0 right-0 z-50",
           // Desktop: relative positioning
-          "sm:relative sm:z-auto",
-          isOpen ? "w-[90%] sm:w-1/3 lg:w-[420px]" : "w-0"
+          "lg:relative lg:z-auto",
+          isOpen ? "w-[90%] lg:w-sm" : "w-0"
         )}
       >
         <div className="h-full flex flex-col">
-          <div className="flex items-center justify-between p-4 pb-0 flex-shrink-0">
-            <h2 className="text-sm font-semibold ">New AI Chat</h2>
+          <div className="flex items-center justify-between px-2 py-1.5  pb-0 flex-shrink-0">
             <Button
               variant="ghost"
-              size="icon"
               onClick={() => setIsOpen(false)}
+              className="text-sm px-1.5 py-0 h-7 font-normal"
             >
-              <ChevronsRight className="size-5 text-foreground" />
+              New AI Chat
             </Button>
+            <div className="flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(false)}
+              >
+                <SquarePen
+                  className="size-4.5 text-foreground"
+                  strokeWidth={1.5}
+                />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(false)}
+              >
+                <ChevronsRight
+                  className="size-5 text-foreground "
+                  strokeWidth={1.5}
+                />
+              </Button>
+            </div>
           </div>
 
-          <div className="flex-1 p-4 pt-4 overflow-hidden">
+          <div className="flex-1 p-4 overflow-hidden">
             <AiChat open={isOpen} />
           </div>
         </div>
