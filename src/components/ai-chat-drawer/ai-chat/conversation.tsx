@@ -33,7 +33,7 @@ export const Conversation = ({
       <ConversationContent
         className={cn(
           "h-auto",
-          messages && messages.length === 0 && "h-[93%] px-2"
+          messages && messages.length === 0 && "h-[99%] px-2"
         )}
       >
         {messages && messages.length === 0 && <ConversationPlaceholder />}
