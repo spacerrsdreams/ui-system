@@ -22,13 +22,11 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface AiChatFormProps {
   model: AiModelT["value"];
   setModel: (model: AiModelT["value"]) => void;
-  input: string;
-  setInput: (input: string) => void;
   webSearch: boolean;
   setWebSearch: (webSearch: boolean) => void;
   onSubmit: (message: PromptInputMessage) => void;
@@ -40,8 +38,6 @@ export const AiChatForm = ({
   model,
   setModel,
   onSubmit,
-  input,
-  setInput,
   webSearch,
   setWebSearch,
   status,
@@ -49,6 +45,7 @@ export const AiChatForm = ({
 }: AiChatFormProps) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const SelectedModel = AiModels.find((AiModel) => AiModel.value === model)!;
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     if (inputRef.current && open) {
@@ -56,8 +53,20 @@ export const AiChatForm = ({
     }
   }, [open]);
 
+  const handleSubmit = (message: PromptInputMessage) => {
+    const hasText = Boolean(message.text);
+    const hasAttachments = Boolean(message.files?.length);
+
+    if (!(hasText || hasAttachments)) {
+      return;
+    }
+
+    onSubmit(message);
+    setInput("");
+  };
+
   return (
-    <PromptInput onSubmit={onSubmit} className="mt-2" globalDrop multiple>
+    <PromptInput onSubmit={handleSubmit} className="mt-2" globalDrop multiple>
       <PromptInputBody>
         <PromptInputAttachments>
           {(attachment) => <PromptInputAttachment data={attachment} />}

@@ -17,6 +17,7 @@ interface ConversationProps {
   messages: UIMessage[];
   status: ChatStatus;
   regenerate: () => void;
+  onQuestionClick: (question: string) => void;
   className?: string;
 }
 
@@ -24,6 +25,7 @@ export const Conversation = ({
   messages,
   status,
   regenerate,
+  onQuestionClick,
   className,
 }: ConversationProps) => {
   const isStreaming = status === "streaming" || status === "submitted";
@@ -32,11 +34,13 @@ export const Conversation = ({
     <ConversationElement className={cn("h-full", className)}>
       <ConversationContent
         className={cn(
-          "h-auto",
-          messages && messages.length === 0 && "h-[99%] px-2"
+          "h-auto p-4",
+          messages && messages.length === 0 && "h-[99%] px-2 py-0"
         )}
       >
-        {messages && messages.length === 0 && <ConversationPlaceholder />}
+        {messages && messages.length === 0 && (
+          <ConversationPlaceholder onQuestionClick={onQuestionClick} />
+        )}
 
         {messages.map((message, messageIndex) => (
           <div key={message.id}>

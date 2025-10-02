@@ -78,7 +78,7 @@ export function AiChatDrawer() {
         )}
       >
         <div className="h-full flex flex-col">
-          <div className="flex items-center justify-between px-2 py-1.5  pb-0 flex-shrink-0">
+          <div className="flex items-center justify-between px-2 py-1.5  pb-2.5 flex-shrink-0">
             <Button
               variant="ghost"
               onClick={() => setIsOpen(false)}
@@ -110,7 +110,7 @@ export function AiChatDrawer() {
             </div>
           </div>
 
-          <div className="flex-1 p-4 overflow-hidden">
+          <div className="flex-1 overflow-hidden">
             <AiChat open={isOpen} />
           </div>
         </div>
