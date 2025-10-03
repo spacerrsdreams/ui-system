@@ -5,9 +5,9 @@ interface ConversationPlaceholderProps {
 }
 
 const Questions = [
-  "What is Myasthenia Gravis?",
-  "What are the symptoms of Myasthenia Gravis?",
   "What medications are available for Myasthenia Gravis?",
+  "How can I manage fatigue and weakness in daily life?",
+  "What is my long-term prognosis with Myasthenia Gravis?",
 ];
 
 export const ConversationPlaceholder = ({

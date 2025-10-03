@@ -21,7 +21,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <BurgerMenu />
-            <main className="flex h-full flex-row subpixel-antialiased transition-all duration-300 ease-in-out">
+            <main className="flex h-full flex-row subpixel-antialiased bg-background transition-all duration-300 ease-in-out">
               {children}
               <AiChatDrawer />
             </main>
